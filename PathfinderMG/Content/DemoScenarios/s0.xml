@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scenario>
+	<Title>Simple beginnings</Title>
+	<Author>Szymon Skorka</Author>
+	<DateCreated>1/3/2021 15:25</DateCreated>
+	<Data>
+		<Row>#...S....</Row>
+		<Row>.#######.</Row>
+		<Row>.#..T..#.</Row>
+		<Row>.#.....#.</Row>
+		<Row>.#.....#.</Row>
+		<Row>.#.....#.</Row>
+		<Row>.#.....#.</Row>
+		<Row>.........</Row>
+	</Data>
+</Scenario>
