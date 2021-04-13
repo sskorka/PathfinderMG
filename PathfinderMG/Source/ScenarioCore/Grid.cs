@@ -233,21 +233,21 @@ namespace PathfinderMG.Core.Source.ScenarioCore
             switch (type)
             {
                 // Empty space
-                case '.':
+                case Constants.NODE_EMPTY:
                     return new Node(isTraversable: true, new Vector2(x, y));
 
                 // Target node
-                case 'T':
+                case Constants.NODE_TARGET:
                     TargetNode = new Node(isTraversable: true, new Vector2(x, y));
                     return TargetNode;
 
                 // Starting node
-                case 'S':
+                case Constants.NODE_START:
                     StartingNode = new Node(isTraversable: true, new Vector2(x, y));
                     return StartingNode;
 
                 // Impassable node
-                case '#':
+                case Constants.NODE_WALL:
                     return new Node(isTraversable: false, new Vector2(x, y));
 
                 default:

@@ -65,7 +65,7 @@ namespace PathfinderMG.Core.Source.ScenarioLoader
                                                                                   Area.Y + PreviewMargin,
                                                                                   Area.Width - PreviewMargin * 2, 
                                                                                   Area.Height - PreviewMargin * 2 - MarginBottom));
-            PreviewedGrid = new Grid(previewInfo, 30, scenario);
+            PreviewedGrid = new Grid(previewInfo, Constants.PREVIEW_NODE_SIZE, scenario);
         }
 
         private void LoadUI()

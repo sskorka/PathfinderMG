@@ -32,7 +32,7 @@ namespace PathfinderMG.Core.Source.States
         {
             // Load grid
             Tuple<bool, Rectangle> previewInfo = Tuple.Create(false, Rectangle.Empty);
-            scenarioGrid = new Grid(previewInfo, 50, scenario);
+            scenarioGrid = new Grid(previewInfo, Constants.DEFAULT_NODE_SIZE, scenario);
 
             // Load pathfinder class
             pathfinder = new AStarPathfinder(scenarioGrid);
