@@ -58,7 +58,7 @@ The latest pre-release version can be downloaded from [here](https://github.com/
 
 You need *.NET Core 3.1 Runtime* (or SDK) installed on your machine in order to run this. <br>
 If you don't have it installed yet, there are **2 ways** to proceed:
-* When attempting to run the executable, an error dialog should pop up that leads to the download of the necessary libraries:
+* When attempting to run the executable, an error dialog should pop up that leads to the download of the necessary libraries: <br>
 <a><img src="https://i.imgur.com/TVURt9P.png" alt="install dialog" width="300"></a>
 * Download the runtime manually from Microsoft:
     * [.NET Runtime 3.1.13](https://dotnet.microsoft.com/download/dotnet/3.1)
