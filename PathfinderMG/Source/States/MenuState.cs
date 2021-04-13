@@ -107,7 +107,7 @@ namespace PathfinderMG.Core.Source.States
 
         private void ScenarioEditor_NewScenario(object sender, EventArgs e)
         {
-            game.ChangeState(new EditorState(game, graphicsDevice));
+            game.ChangeState(new EditorState(game, graphicsDevice, null));
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
