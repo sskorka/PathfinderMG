@@ -14,19 +14,20 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
 
         private Texture2D toolbarTexture;
         private List<ToolbarItem> toolbarItems;
-        private List<Texture2D> toolbarItemsTextures = new List<Texture2D>();       
+        private List<Texture2D> toolbarItemsTextures = new List<Texture2D>();
 
-        public Vector2 ItemDimensions { get; set; } = new Vector2(50,50);
-        public Vector2 ItemMargin { get; set; } = new Vector2(5, 0);
+        public int ToolbarHeight { get; set; } = 80;
         public int BottomMargin { get; set; } = 20;
+        public float ItemDimensions { get { return ToolbarHeight * 0.6f; } }
+        public Vector2 ItemMargin { get; set; } = new Vector2(5, 0);
 
         public Rectangle Area
         {
             get
             {
-                Vector2 dimensions = new Vector2((NUMBER_OF_ITEMS * ItemDimensions.X) + (NUMBER_OF_ITEMS - 1) * ItemMargin.X, ItemDimensions.Y);
+                Vector2 dimensions = new Vector2((NUMBER_OF_ITEMS * ToolbarHeight) + ((NUMBER_OF_ITEMS - 1) * ItemMargin.X), ToolbarHeight);
                 return new Rectangle((Constants.SCREEN_WIDTH / 2) - ((int)dimensions.X / 2), 
-                                     Constants.SCREEN_HEIGHT - (int)ItemDimensions.Y - BottomMargin, 
+                                     Constants.SCREEN_HEIGHT - ToolbarHeight - BottomMargin, 
                                      (int)dimensions.X, (int)dimensions.Y);
             }
         }
@@ -38,11 +39,14 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
             toolbarItems = new List<ToolbarItem>();
             for (int i = 0; i < NUMBER_OF_ITEMS; i++)
             {
+                // (x, y) position of each item should be placed in the center of its grid space
+                // the item should then draw itself offsetting itself by origin
                 ToolbarItem item = new ToolbarItem()
                 {
                     Texture = toolbarItemsTextures[i],
-                    Area = new Rectangle(Area.X + (i * (int)ItemDimensions.X) + (i * (int)ItemMargin.X), 
-                                         Area.Y, (int)ItemDimensions.X, (int)ItemDimensions.Y)
+                    Area = new Rectangle(Area.X + (i * ToolbarHeight) + (i * (int)ItemMargin.X) + ((int)ItemDimensions / 2), 
+                                         Area.Y + ((int)ItemDimensions / 2),
+                                         (int)ItemDimensions, (int)ItemDimensions),
                 };
                 toolbarItems.Add(item);
             }
