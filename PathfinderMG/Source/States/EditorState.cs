@@ -41,9 +41,9 @@ namespace PathfinderMG.Core.Source.States
         private Grid grid;
 
         /// <summary>
-        /// Represents the scenario editor state
+        /// Constructor for initializing EditorState
         /// </summary>
-        /// <param name="grid">Provide grid for </param>
+        /// <param name="grid">Set to null to use a clear, default grid</param>
         public EditorState(GameRoot game, GraphicsDevice graphicsDevice, Grid grid) 
             : base(game, graphicsDevice)
         {
