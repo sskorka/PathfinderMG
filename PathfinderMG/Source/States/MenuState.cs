@@ -67,8 +67,7 @@ namespace PathfinderMG.Core.Source.States
                 Text = BUTTON_STRINGS["editor"]
             };
 
-            // Deactivated for v0.1.0
-            // scenarioEditorButton.Click += ScenarioEditorButton_Click;
+            scenarioEditorButton.Click += ScenarioEditorButton_Click;
 
             Button exitButton = new Button(isOriginAtCenter: true, buttonPackDefault)
             {
