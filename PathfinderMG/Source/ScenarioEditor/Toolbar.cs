@@ -12,6 +12,7 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
         // The toolbar should (for now) consist of [1] Wall tool, [2, 3] Start and target node, [4] Clear tool
         private const int NUMBER_OF_ITEMS = 4;
 
+        private Texture2D toolbarTexture;
         private List<ToolbarItem> toolbarItems;
         private List<Texture2D> toolbarItemsTextures = new List<Texture2D>();       
 
@@ -49,10 +50,11 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
 
         private void LoadContent()
         {
-            toolbarItemsTextures.Add(GameRoot.ContentMgr.Load<Texture2D>("Icons/WallIcon"));
+            toolbarTexture = GameRoot.ContentMgr.Load<Texture2D>("Editor/Toolbar");
+            toolbarItemsTextures.Add(GameRoot.ContentMgr.Load<Texture2D>("Grid/ImpassableNode"));
             toolbarItemsTextures.Add(GameRoot.ContentMgr.Load<Texture2D>("Grid/StartNode"));
-            toolbarItemsTextures.Add(GameRoot.ContentMgr.Load<Texture2D>("Icons/FinishIcon"));
-            toolbarItemsTextures.Add(GameRoot.ContentMgr.Load<Texture2D>("Icons/RubberIcon"));
+            toolbarItemsTextures.Add(GameRoot.ContentMgr.Load<Texture2D>("Grid/TargetNode"));
+            toolbarItemsTextures.Add(GameRoot.ContentMgr.Load<Texture2D>("Editor/Rubber"));
         }
 
         public void Update(GameTime gameTime)
@@ -63,6 +65,10 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            // Draw toolbar
+            spriteBatch.Draw(toolbarTexture, Area, Color.White);
+
+            // Draw toolbar items
             foreach (var item in toolbarItems)
                 item.Draw(gameTime, spriteBatch);
         }
