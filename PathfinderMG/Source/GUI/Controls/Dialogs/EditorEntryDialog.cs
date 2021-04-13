@@ -33,8 +33,6 @@ namespace PathfinderMG.Core.Source.GUI.Controls.Dialogs
         public EditorEntryDialog()
             : base(isCancellableThroughBackground: true)
         {
-            dialogTex = GameRoot.ContentMgr.Load<Texture2D>("Controls/Button");
-
             Dimensions = new Vector2(buttonWidth + (2 * HorizontalPadding), (2 * buttonHeight) + (2 * VerticalPadding) + VerticalButtonMargin);
             Position = new Vector2(Constants.SCREEN_WIDTH / 2 - Dimensions.X / 2, Constants.SCREEN_HEIGHT / 2 - Dimensions.Y / 2);
 
@@ -47,7 +45,16 @@ namespace PathfinderMG.Core.Source.GUI.Controls.Dialogs
 
         private void LoadUI()
         {
-            EditScenarioButton = new Button(isOriginAtCenter: true)
+            dialogTex = GameRoot.ContentMgr.Load<Texture2D>("Controls/PanelBackground");
+
+            ButtonPack buttonPack = new ButtonPack()
+            {
+                TexDefault = GameRoot.ContentMgr.Load<Texture2D>("Controls/Buttons/Button"),
+                TexHovered = GameRoot.ContentMgr.Load<Texture2D>("Controls/Buttons/ButtonHovered"),
+                TexSelected = GameRoot.ContentMgr.Load<Texture2D>("Controls/Buttons/ButtonSelected")
+            };
+
+            EditScenarioButton = new Button(isOriginAtCenter: true, buttonPack)
             {
                 Text = editExistingStr,
                 Dimensions = new Vector2(buttonWidth, buttonHeight)
@@ -56,7 +63,7 @@ namespace PathfinderMG.Core.Source.GUI.Controls.Dialogs
             EditScenarioButton.Position = new Vector2(Position.X + Dimensions.X / 2, Position.Y + (Dimensions.Y / 2) - (EditScenarioButton.Dimensions.Y / 2) - VerticalButtonMargin);
             //EditScenarioButton.Click += EditScenarioButton_Click;
 
-            NewScenarioButton = new Button(isOriginAtCenter: true)
+            NewScenarioButton = new Button(isOriginAtCenter: true, buttonPack)
             {
                 Text = newScenarioStr,
                 Dimensions = new Vector2(buttonWidth, buttonHeight)
@@ -99,7 +106,7 @@ namespace PathfinderMG.Core.Source.GUI.Controls.Dialogs
         {
             base.Draw(gameTime, spriteBatch);
 
-            spriteBatch.Draw(dialogTex, Rectangle, Color.White);
+            spriteBatch.Draw(dialogTex, Rectangle, Color.Black);
 
             foreach (var c in components)
                 c.Draw(gameTime, spriteBatch);
