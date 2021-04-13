@@ -298,6 +298,30 @@
 #begin DemoScenarios/s6.xml
 /copy:DemoScenarios/s6.xml
 
+#begin Editor/Rubber.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=True
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Compressed
+/build:Editor/Rubber.png
+
+#begin Editor/Toolbar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=True
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Compressed
+/build:Editor/Toolbar.png
+
 #begin Fonts/DefaultFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
