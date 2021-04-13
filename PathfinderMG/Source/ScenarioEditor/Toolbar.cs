@@ -41,7 +41,7 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
             {
                 // (x, y) position of each item should be placed in the center of its grid space
                 // the item should then draw itself offsetting itself by origin
-                ToolbarItem item = new ToolbarItem()
+                ToolbarItem item = new ToolbarItem(i + 1)
                 {
                     Texture = toolbarItemsTextures[i],
                     Area = new Rectangle(Area.X + (i * ToolbarHeight) + (i * (int)ItemMargin.X) + ((int)ItemDimensions / 2), 
@@ -50,6 +50,13 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
                 };
                 toolbarItems.Add(item);
             }
+
+            Select(1);
+        }
+
+        public void Select(int index)
+        {
+            toolbarItems.Find(t => t.Index == index).Select();
         }
 
         private void LoadContent()
