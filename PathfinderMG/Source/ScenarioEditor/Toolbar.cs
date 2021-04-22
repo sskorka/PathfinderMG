@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
 namespace PathfinderMG.Core.Source.ScenarioEditor
@@ -15,6 +16,12 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
         private Texture2D toolbarTexture;
         private List<ToolbarItem> toolbarItems;
         private List<Texture2D> toolbarItemsTextures = new List<Texture2D>();
+
+        /// <summary>
+        /// For development only. Keyboard management should be
+        /// moved to its own managing class before release.
+        /// </summary>
+        private KeyboardState previousKeyboard, currentKeyboard;
 
         public int ToolbarHeight { get; set; } = 80;
         public int BottomMargin { get; set; } = 20;
@@ -79,6 +86,19 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
 
         public void Update(GameTime gameTime)
         {
+            // Detect item selection before updating individual items
+            previousKeyboard = currentKeyboard;
+            currentKeyboard = Keyboard.GetState();
+
+            if (previousKeyboard.IsKeyDown(Keys.D1) && currentKeyboard.IsKeyUp(Keys.D1))
+                Select(1);
+            else if (previousKeyboard.IsKeyDown(Keys.D2) && currentKeyboard.IsKeyUp(Keys.D2))
+                Select(2);
+            else if (previousKeyboard.IsKeyDown(Keys.D3) && currentKeyboard.IsKeyUp(Keys.D3))
+                Select(3);
+            else if (previousKeyboard.IsKeyDown(Keys.D4) && currentKeyboard.IsKeyUp(Keys.D4))
+                Select(4);
+
             foreach (var item in toolbarItems)
                 item.Update(gameTime);
         }
