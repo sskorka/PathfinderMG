@@ -89,6 +89,7 @@ namespace PathfinderMG.Core.Source.States
             spriteBatch.Begin();
 
             base.Draw(gameTime, spriteBatch);
+            grid.Draw(gameTime, spriteBatch);
             toolbar.Draw(gameTime, spriteBatch);
 
             spriteBatch.End();
