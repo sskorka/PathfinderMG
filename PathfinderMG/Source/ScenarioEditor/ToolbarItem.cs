@@ -29,6 +29,11 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
             IsSelected = true;
         }
 
+        public void Deselect()
+        {
+            IsSelected = false;
+        }
+
         public void Update(GameTime gameTime)
         {
 

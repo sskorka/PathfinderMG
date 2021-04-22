@@ -56,7 +56,16 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
 
         public void Select(int index)
         {
-            toolbarItems.Find(t => t.Index == index).Select();
+            var itemToSelect = toolbarItems.Find(t => t.Index == index);
+            itemToSelect.Select();
+
+            foreach (var item in toolbarItems)
+            {
+                if (item == itemToSelect)
+                    continue;
+
+                item.Deselect();
+            }
         }
 
         private void LoadContent()
