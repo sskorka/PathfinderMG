@@ -10,6 +10,23 @@ namespace PathfinderMG.Core.Source.States
 {
     class EditorState : State
     {
+        private readonly Dictionary<string, string> LABEL_STRINGS = new Dictionary<string, string>()
+        {
+            { "loc", "Loc: " },
+            { "gridSize", "Grid size" },
+            { "width", "Width: " },
+            { "height", "Height: " }
+        };
+        private readonly Dictionary<string, string> BUTTON_STRINGS = new Dictionary<string, string>()
+        {
+            { "save", "Save" },
+            { "reset", "Reset" }
+        };
+        private readonly Dictionary<string, string> VARIOUS_STRINGS = new Dictionary<string, string>()
+        {
+            { "settings", "Settings" }
+        };
+
         private const int DEFAULT_ROWS_COLS = 4;
 
         private Toolbar toolbar;
