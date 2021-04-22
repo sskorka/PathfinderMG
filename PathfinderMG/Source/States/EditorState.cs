@@ -28,7 +28,7 @@ namespace PathfinderMG.Core.Source.States
             if (grid == null)
             {
                 Tuple<bool, Rectangle> previewData = Tuple.Create(false, Rectangle.Empty);
-                grid = new Grid(previewData, Constants.DEFAULT_NODE_SIZE, GetDefaultScenario());
+                this.grid = new Grid(previewData, Constants.DEFAULT_NODE_SIZE, GetDefaultScenario());
             }
             else
                 this.grid = grid;
