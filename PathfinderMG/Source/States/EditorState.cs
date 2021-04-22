@@ -13,6 +13,8 @@ namespace PathfinderMG.Core.Source.States
 {
     class EditorState : State
     {
+        #region Fields
+
         private readonly Dictionary<string, string> LABEL_STRINGS = new Dictionary<string, string>()
         {
             { "loc", "Loc: " },
@@ -38,6 +40,10 @@ namespace PathfinderMG.Core.Source.States
         private PanelContainer settingsPanel;
         private TextBox widthTextBox, heightTextBox;
 
+        #endregion
+
+        #region Constructor
+
         /// <summary>
         /// Constructor for initializing EditorState
         /// </summary>
@@ -59,6 +65,41 @@ namespace PathfinderMG.Core.Source.States
 
             LoadUI();
             toolbar = new Toolbar();
+        }
+
+        #endregion
+
+        #region Methods
+
+        private ScenarioWrapper GetDefaultScenario()
+        {
+            List<string> scenarioData = new List<string>();
+            StringBuilder sb = new StringBuilder();
+
+            // Fill the list with empty spaces
+            for (int i = 0; i < DEFAULT_ROWS_COLS; i++)
+            {
+                for (int j = 0; j < DEFAULT_ROWS_COLS; j++)
+                {
+                    // Place start node and target node in the corners
+                    if (i == 0 && j == 0)
+                        sb.Append(Constants.NODE_START);
+                    else if (i == (DEFAULT_ROWS_COLS - 1) && j == (DEFAULT_ROWS_COLS - 1))
+                        sb.Append(Constants.NODE_TARGET);
+                    else
+                        sb.Append(Constants.NODE_EMPTY);
+                }
+                scenarioData.Add(sb.ToString());
+                sb.Clear();
+            }
+
+            return new ScenarioWrapper()
+            {
+                Title = "Untitled",
+                Author = "No author",
+                DateCreated = DateTime.Now,
+                Data = scenarioData
+            };
         }
 
         private void LoadUI()
@@ -113,16 +154,6 @@ namespace PathfinderMG.Core.Source.States
             settingsPanel.Add(tbInput);
         }
 
-        private void TbInput_InputChanged(object sender, string e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void TbInput_EnterDown(object sender, KeyboardInput.KeyEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         private void ConstructLabel_SettingsPanel(string str)
         {
             Label label;
@@ -159,6 +190,20 @@ namespace PathfinderMG.Core.Source.States
             settingsPanel.Add(resetScenario);
         }
 
+        #endregion
+
+        #region Event Handlers
+
+        private void TbInput_InputChanged(object sender, string e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void TbInput_EnterDown(object sender, KeyboardInput.KeyEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         private void ResetScenario_Click(object sender, EventArgs e)
         {
             throw new NotImplementedException();
@@ -171,39 +216,6 @@ namespace PathfinderMG.Core.Source.States
 
         private void EditorEntryDialog_BackgroundClick(object sender, EventArgs e)
         {
-        }
-
-        #region Methods
-
-        private ScenarioWrapper GetDefaultScenario()
-        {
-            List<string> scenarioData = new List<string>();
-            StringBuilder sb = new StringBuilder();
-
-            // Fill the list with empty spaces
-            for (int i = 0; i < DEFAULT_ROWS_COLS; i++)
-            {
-                for (int j = 0; j < DEFAULT_ROWS_COLS; j++)
-                {
-                    // Place start node and target node in the corners
-                    if (i == 0 && j == 0)
-                        sb.Append(Constants.NODE_START);
-                    else if (i == (DEFAULT_ROWS_COLS - 1) && j == (DEFAULT_ROWS_COLS - 1))
-                        sb.Append(Constants.NODE_TARGET);
-                    else
-                        sb.Append(Constants.NODE_EMPTY);
-                }
-                scenarioData.Add(sb.ToString());
-                sb.Clear();
-            }
-
-            return new ScenarioWrapper()
-            {
-                Title = "Untitled",
-                Author = "No author",
-                DateCreated = DateTime.Now,
-                Data = scenarioData
-            };
         }
 
         #endregion
