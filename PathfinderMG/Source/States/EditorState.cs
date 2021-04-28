@@ -73,25 +73,7 @@ namespace PathfinderMG.Core.Source.States
 
         private ScenarioWrapper GetDefaultScenario()
         {
-            List<string> scenarioData = new List<string>();
-            StringBuilder sb = new StringBuilder();
-
-            // Fill the list with empty spaces
-            for (int i = 0; i < DEFAULT_ROWS_COLS; i++)
-            {
-                for (int j = 0; j < DEFAULT_ROWS_COLS; j++)
-                {
-                    // Place start node and target node in the corners
-                    if (i == 0 && j == 0)
-                        sb.Append(Constants.NODE_START);
-                    else if (i == (DEFAULT_ROWS_COLS - 1) && j == (DEFAULT_ROWS_COLS - 1))
-                        sb.Append(Constants.NODE_TARGET);
-                    else
-                        sb.Append(Constants.NODE_EMPTY);
-                }
-                scenarioData.Add(sb.ToString());
-                sb.Clear();
-            }
+            List<string> scenarioData = GetScenarioData(DEFAULT_ROWS_COLS, DEFAULT_ROWS_COLS, forDefaultScenario: true);
 
             return new ScenarioWrapper()
             {
@@ -100,6 +82,40 @@ namespace PathfinderMG.Core.Source.States
                 DateCreated = DateTime.Now,
                 Data = scenarioData
             };
+        }
+
+        private List<string> GetScenarioData(int width, int height, bool forDefaultScenario = false)
+        {
+            List<string> scenarioData = new List<string>();
+            StringBuilder sb = new StringBuilder();
+
+            // Fill the list with empty spaces
+            for (int i = 0; i < width; i++)
+            {
+                for (int j = 0; j < height; j++)
+                {
+                    if (forDefaultScenario)
+                    {
+                        // Place start node and target node in the corners
+                        if (i == 0 && j == 0)
+                        {
+                            sb.Append(Constants.NODE_START);
+                            continue;
+                        }
+                        else if (i == (DEFAULT_ROWS_COLS - 1) && j == (DEFAULT_ROWS_COLS - 1))
+                        {
+                            sb.Append(Constants.NODE_TARGET);
+                            continue;
+                        }
+                    }
+                    
+                    sb.Append(Constants.NODE_EMPTY);
+                }
+                scenarioData.Add(sb.ToString());
+                sb.Clear();
+            }
+
+            return scenarioData;
         }
 
         private void LoadUI()
