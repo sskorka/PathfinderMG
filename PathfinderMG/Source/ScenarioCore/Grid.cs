@@ -48,6 +48,10 @@ namespace PathfinderMG.Core.Source.ScenarioCore
         public Node TargetNode { get; private set; }
         public IPathfinder Algorithm { get; private set; }
 
+        public string Title { get; private set; }
+        public string Author { get; private set; }
+        public DateTime DateCreated { get; private set; }
+
         /// <summary>
         /// Fires when mouse cursor hovers over node
         /// </summary>
@@ -74,6 +78,9 @@ namespace PathfinderMG.Core.Source.ScenarioCore
             this.nodeSize = nodeSize;
             hoveredNode = new Vector2(-1, -1);
 
+            Title = scenario.Title;
+            Author = scenario.Author;
+            DateCreated = scenario.DateCreated;
             nodes = GetGridFromWrapper(scenario);
 
             isPreviewMode = previewData.Item1;
