@@ -196,7 +196,14 @@ namespace PathfinderMG.Core.Source.States
 
         private void TbInput_InputChanged(object sender, string e)
         {
-            throw new NotImplementedException();
+            int inputValue;
+            if (Int32.TryParse(e, out inputValue))
+            {
+                if (inputValue > MAX_GRID_DIMENSIONS)
+                    inputValue = MAX_GRID_DIMENSIONS;
+                                
+                (sender as TextBox).Text.String = inputValue.ToString();
+            }
         }
 
         private void TbInput_EnterDown(object sender, KeyboardInput.KeyEventArgs e)
