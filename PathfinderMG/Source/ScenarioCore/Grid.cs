@@ -81,7 +81,7 @@ namespace PathfinderMG.Core.Source.ScenarioCore
             Title = scenario.Title;
             Author = scenario.Author;
             DateCreated = scenario.DateCreated;
-            nodes = GetGridFromWrapper(scenario);
+            nodes = GetGridFromWrapper(scenario.Data);
 
             isPreviewMode = previewData.Item1;
 
@@ -217,15 +217,15 @@ namespace PathfinderMG.Core.Source.ScenarioCore
             return output;
         }
 
-        private Node[,] GetGridFromWrapper(ScenarioWrapper scenario)
+        private Node[,] GetGridFromWrapper(System.Collections.Generic.List<string> scenarioData)
         {
-            nodeCount = new Vector2(scenario.Data[0].Length, scenario.Data.Count);
+            nodeCount = new Vector2(scenarioData[0].Length, scenarioData.Count);
             Node[,] output = new Node[(int)nodeCount.X, (int)nodeCount.Y];
 
             for (int i = 0; i < nodeCount.X; i++)
                 for (int j = 0; j < nodeCount.Y; j++)
                 {
-                    char nodeType = scenario.Data[j][i];
+                    char nodeType = scenarioData[j][i];
                     output[i, j] = GetNewNode(nodeType, i, j);
                 }            
 
