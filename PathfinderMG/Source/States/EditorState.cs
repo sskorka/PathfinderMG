@@ -139,16 +139,16 @@ namespace PathfinderMG.Core.Source.States
             // Remember that PanelContainer takes care of positioning :)
             ConstructLabel_SettingsPanel(LABEL_STRINGS["gridSize"]);
             ConstructLabel_SettingsPanel(LABEL_STRINGS["width"]);
-            ConstructTextBox_SettingsPanel(font, widthTextBox);
+            ConstructTextBox_SettingsPanel(font, ref widthTextBox);
             ConstructLabel_SettingsPanel(LABEL_STRINGS["height"]);
-            ConstructTextBox_SettingsPanel(font, heightTextBox);
+            ConstructTextBox_SettingsPanel(font, ref heightTextBox);
             ConstructLabel_SettingsPanel(LABEL_STRINGS["loc"]);
             ConstructButtons_SettingsPanel();
 
             components.Add(settingsPanel);
         }
 
-        private void ConstructTextBox_SettingsPanel(SpriteFont font, TextBox tbInput)
+        private void ConstructTextBox_SettingsPanel(SpriteFont font, ref TextBox tbInput)
         {
             Rectangle tbArea = new Rectangle(0, 0, (int)font.MeasureString("999").X * 3, 20);
 
