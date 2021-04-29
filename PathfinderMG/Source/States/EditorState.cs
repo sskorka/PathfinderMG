@@ -34,11 +34,13 @@ namespace PathfinderMG.Core.Source.States
 
         private const int DEFAULT_ROWS_COLS = 4;
         private const int MAX_GRID_DIMENSIONS = 100;
+        private const int MIN_GRID_SIZE = 3; // Start node, end node and one empty space
 
         private Toolbar toolbar;
         private Grid grid;
         private PanelContainer settingsPanel;
         private TextBox widthTextBox, heightTextBox;
+        private Tuple<bool, Rectangle> previewData = Tuple.Create(false, Rectangle.Empty);
 
         #endregion
 
@@ -54,14 +56,10 @@ namespace PathfinderMG.Core.Source.States
             Texture2D buttonTexture = GameRoot.ContentMgr.Load<Texture2D>("Controls/Button");
             SpriteFont buttonFont = GameRoot.ContentMgr.Load<SpriteFont>("Fonts/DefaultFont");
 
-            if (grid == null)
-            {
-                Tuple<bool, Rectangle> previewData = Tuple.Create(false, Rectangle.Empty);
-                this.grid = new Grid(previewData, Constants.DEFAULT_NODE_SIZE, GetDefaultScenario());
-            }
+            if (grid == null)            
+                this.grid = new Grid(previewData, Constants.DEFAULT_NODE_SIZE, GetDefaultScenario());            
             else
                 this.grid = grid;
-
 
             LoadUI();
             toolbar = new Toolbar();
