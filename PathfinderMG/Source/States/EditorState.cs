@@ -97,17 +97,17 @@ namespace PathfinderMG.Core.Source.States
                         // Place start node and target node in the corners
                         if (i == 0 && j == 0)
                         {
-                            sb.Append(Constants.NODE_START);
+                            sb.Append((char)Constants.NodeType.StartNode);
                             continue;
                         }
                         else if (i == (DEFAULT_ROWS_COLS - 1) && j == (DEFAULT_ROWS_COLS - 1))
                         {
-                            sb.Append(Constants.NODE_TARGET);
+                            sb.Append((char)Constants.NodeType.TargetNode);
                             continue;
                         }
                     }
                     
-                    sb.Append(Constants.NODE_EMPTY);
+                    sb.Append((char)Constants.NodeType.EmptyNode);
                 }
                 scenarioData.Add(sb.ToString());
                 sb.Clear();
