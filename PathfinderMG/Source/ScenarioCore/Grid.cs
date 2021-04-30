@@ -244,7 +244,7 @@ namespace PathfinderMG.Core.Source.ScenarioCore
             for (int i = 0; i < nodeCount.X; i++)
                 for (int j = 0; j < nodeCount.Y; j++)
                 {
-                    char nodeType = scenarioData[j][i];
+                    var nodeType = (Constants.NodeType)scenarioData[j][i];
                     output[i, j] = GetNewNode(nodeType, i, j);
                 }            
 
@@ -254,26 +254,26 @@ namespace PathfinderMG.Core.Source.ScenarioCore
             return output;
         }
 
-        private Node GetNewNode(char type, int x, int y)
+        private Node GetNewNode(Constants.NodeType type, int x, int y)
         {
             switch (type)
             {
                 // Empty space
-                case Constants.NODE_EMPTY:
+                case Constants.NodeType.EmptyNode:
                     return new Node(isTraversable: true, new Vector2(x, y));
 
                 // Target node
-                case Constants.NODE_TARGET:
+                case Constants.NodeType.TargetNode:
                     TargetNode = new Node(isTraversable: true, new Vector2(x, y));
                     return TargetNode;
 
                 // Starting node
-                case Constants.NODE_START:
+                case Constants.NodeType.StartNode:
                     StartingNode = new Node(isTraversable: true, new Vector2(x, y));
                     return StartingNode;
 
                 // Impassable node
-                case Constants.NODE_WALL:
+                case Constants.NodeType.WallNode:
                     return new Node(isTraversable: false, new Vector2(x, y));
 
                 default:
