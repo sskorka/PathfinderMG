@@ -4,6 +4,14 @@ namespace PathfinderMG.Core.Source
 {
     static class Constants
     {
+        public enum NodeType
+        {
+            EmptyNode = 46, // '.'
+            WallNode = 35, // '#'
+            StartNode = 83, // 'S'
+            TargetNode = 84 // 'T'
+        }
+
         public const char NODE_EMPTY = '.';
         public const char NODE_WALL = '#';
         public const char NODE_START = 'S';
