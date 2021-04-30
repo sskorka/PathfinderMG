@@ -12,11 +12,6 @@ namespace PathfinderMG.Core.Source
             TargetNode = 84 // 'T'
         }
 
-        public const char NODE_EMPTY = '.';
-        public const char NODE_WALL = '#';
-        public const char NODE_START = 'S';
-        public const char NODE_TARGET = 'T';
-
         public const int DEFAULT_NODE_SIZE = 50;
         public const int PREVIEW_NODE_SIZE = 30;
 
