@@ -267,7 +267,13 @@ namespace PathfinderMG.Core.Source.States
 
         private void TbInput_EnterDown(object sender, KeyboardInput.KeyEventArgs e)
         {
-            throw new NotImplementedException();
+            int width = Int32.Parse(widthTextBox.Text.String);
+            int height = Int32.Parse(heightTextBox.Text.String);
+
+            if (width == (int)grid.GridSize.X && height == (int)grid.GridSize.Y)
+                return;
+
+            ResizeGrid(width, height);
         }
 
         private void ResetScenario_Click(object sender, EventArgs e)
