@@ -116,6 +116,51 @@ namespace PathfinderMG.Core.Source.States
             return scenarioData;
         }
 
+        private void ResizeGrid(int width, int height)
+        {
+            // Let's try enlarging the grid first
+            // Will try to preserve current grid setup
+
+            if (width * height < MIN_GRID_SIZE)
+                throw new Exception("Requested size is too small!");
+
+            List<string> newMap = GetScenarioData(width, height);
+
+            Vector2 startPosition = grid.StartingNode.Position;
+            Vector2 targetPosition = grid.TargetNode.Position;
+
+            /**
+             * Insert start node
+             * 
+             * If the previous position is in bounds with the new map, place it back.
+             * Otherwise place it at the top-left corner.
+             */
+            if((int)startPosition.X < width && (int)startPosition.Y < height)
+                newMap[(int)startPosition.X] = newMap[(int)startPosition.X].Remove((int)startPosition.Y, 1).Insert((int)startPosition.Y, Constants.NODE_START.ToString());
+            else
+                newMap[0] = newMap[0].Remove(0, 1).Insert(0, Constants.NODE_START.ToString());
+
+            /**
+             * Insert target node
+             * 
+             * Previous steps apply, but the target node should be placed under the start node.
+             */
+            if ((int)targetPosition.X < width && (int)targetPosition.Y < height)
+                newMap[(int)targetPosition.X] = newMap[(int)targetPosition.X].Remove((int)targetPosition.Y, 1).Insert((int)targetPosition.Y, Constants.NODE_TARGET.ToString());
+            else
+                newMap[0] = newMap[0].Remove(1, 1).Insert(1, Constants.NODE_TARGET.ToString());
+
+            var newScenario = new ScenarioWrapper()
+            {
+                Title = grid.Title,
+                Author = grid.Author,
+                DateCreated = grid.DateCreated,
+                Data = newMap
+            };
+
+            grid = new Grid(previewData, Constants.DEFAULT_NODE_SIZE, newScenario);
+        }
+
         private void LoadUI()
         {
             SpriteFont font = GameRoot.ContentMgr.Load<SpriteFont>("Fonts/DefaultFont");
