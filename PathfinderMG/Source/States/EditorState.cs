@@ -136,9 +136,13 @@ namespace PathfinderMG.Core.Source.States
              * Otherwise place it at the top-left corner.
              */
             if((int)startPosition.X < width && (int)startPosition.Y < height)
-                newMap[(int)startPosition.X] = newMap[(int)startPosition.X].Remove((int)startPosition.Y, 1).Insert((int)startPosition.Y, Constants.NODE_START.ToString());
+                newMap[(int)startPosition.X] = newMap[(int)startPosition.X]
+                                                    .Remove((int)startPosition.Y, 1)
+                                                    .Insert((int)startPosition.Y, ((char)Constants.NodeType.StartNode).ToString());
             else
-                newMap[0] = newMap[0].Remove(0, 1).Insert(0, Constants.NODE_START.ToString());
+                newMap[0] = newMap[0]
+                            .Remove(0, 1)
+                            .Insert(0, ((char)Constants.NodeType.StartNode).ToString());
 
             /**
              * Insert target node
@@ -146,9 +150,13 @@ namespace PathfinderMG.Core.Source.States
              * Previous steps apply, but the target node should be placed under the start node.
              */
             if ((int)targetPosition.X < width && (int)targetPosition.Y < height)
-                newMap[(int)targetPosition.X] = newMap[(int)targetPosition.X].Remove((int)targetPosition.Y, 1).Insert((int)targetPosition.Y, Constants.NODE_TARGET.ToString());
+                newMap[(int)targetPosition.X] = newMap[(int)targetPosition.X]
+                                                     .Remove((int)targetPosition.Y, 1)
+                                                     .Insert((int)targetPosition.Y, ((char)Constants.NodeType.TargetNode).ToString());
             else
-                newMap[0] = newMap[0].Remove(1, 1).Insert(1, Constants.NODE_TARGET.ToString());
+                newMap[0] = newMap[0]
+                            .Remove(1, 1)
+                            .Insert(1, ((char)Constants.NodeType.TargetNode).ToString());
 
             var newScenario = new ScenarioWrapper()
             {
