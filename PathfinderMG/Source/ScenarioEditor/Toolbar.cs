@@ -58,7 +58,7 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
                 toolbarItems.Add(item);
             }
 
-            Select(1);
+            toolbarItems[0].Select();
         }
 
         public void Select(int index)
