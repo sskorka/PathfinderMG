@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace PathfinderMG.Core.Source.ScenarioEditor
@@ -27,6 +28,8 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
         public int BottomMargin { get; set; } = 20;
         public float ItemDimensions { get { return ToolbarHeight * 0.6f; } }
         public Vector2 ItemMargin { get; set; } = new Vector2(5, 0);
+
+        public event EventHandler ToolbarSelectionChanged;
 
         public Rectangle Area
         {
