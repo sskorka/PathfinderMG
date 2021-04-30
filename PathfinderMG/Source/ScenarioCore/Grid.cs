@@ -134,6 +134,25 @@ namespace PathfinderMG.Core.Source.ScenarioCore
             nodeSize *= scaleFactor;
         }
 
+        private void SetHoveredNodeType(Constants.NodeType type)
+        {
+            switch(type)
+            {
+                case Constants.NodeType.EmptyNode:
+                    hoveredNodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/HoveredNode");
+                    break;
+                case Constants.NodeType.WallNode:
+                    hoveredNodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/ImpassableNode");
+                    break;
+                case Constants.NodeType.StartNode:
+                    hoveredNodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/StartNode");
+                    break;
+                case Constants.NodeType.TargetNode:
+                    hoveredNodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/TargetNode");
+                    break;
+            }
+        }
+
         #endregion
 
         #region Update/Draw
