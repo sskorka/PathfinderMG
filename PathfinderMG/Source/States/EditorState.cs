@@ -305,7 +305,7 @@ namespace PathfinderMG.Core.Source.States
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-
+            grid.Update(gameTime);
             toolbar.Update(gameTime);
         }
 
