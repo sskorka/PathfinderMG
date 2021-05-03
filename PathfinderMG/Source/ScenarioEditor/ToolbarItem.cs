@@ -6,7 +6,7 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
     class ToolbarItem
     {
         public bool IsSelected { get; private set; } = false;
-        public int Index { get; }
+        public Tool ToolType { get; set; }
         public Rectangle Area { get; set; }
         public Texture2D Texture { get; set; }
         public Texture2D TextureSelected { get; private set; }
@@ -18,9 +18,9 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
             }
         }
 
-        public ToolbarItem(int index)
+        public ToolbarItem(Tool type)
         {
-            Index = index;
+            ToolType = type;
             TextureSelected = GameRoot.ContentMgr.Load<Texture2D>("Editor/SelectedToolbarItem");
         }
 
