@@ -62,6 +62,7 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
             }
 
             toolbarItems[0].Select();
+            ToolbarSelectionChanged?.Invoke(this, toolbarItems[0].ToolType);
         }
 
         public void Select(int index)
@@ -76,6 +77,8 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
 
                 item.Deselect();
             }
+
+            ToolbarSelectionChanged?.Invoke(this, itemToSelect.ToolType);
         }
 
         private void LoadContent()
