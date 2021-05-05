@@ -170,9 +170,9 @@ namespace PathfinderMG.Core.Source.ScenarioCore
             }
         }
 
-        public List<string> GetGridData()
+        public ScenarioWrapper GetGridWrapper()
         {
-            List<string> output = new List<string>();
+            List<string> data = new List<string>();
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < Nodes.GetLength(0); i++)
             {
@@ -187,11 +187,17 @@ namespace PathfinderMG.Core.Source.ScenarioCore
                     else
                         sb.Append((char)Constants.NodeType.EmptyNode);
                 }
-                output.Add(sb.ToString());
+                data.Add(sb.ToString());
                 sb.Clear();
             }
 
-            return output;
+            return new ScenarioWrapper()
+            {
+                Author = Author,
+                Title = Title,
+                DateCreated = DateCreated,
+                Data = data
+            };                
         }
 
         private Vector2 GetNodeCoordsFromLocation(Vector2 location)
