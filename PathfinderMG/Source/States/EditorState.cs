@@ -64,6 +64,8 @@ namespace PathfinderMG.Core.Source.States
             LoadUI();
             toolbar = new Toolbar();
             toolbar.ToolbarSelectionChanged += Toolbar_ToolbarSelectionChanged;
+                        
+            this.grid.SetHoveredNodeType(Tool.Wall);
         }
 
         #endregion
