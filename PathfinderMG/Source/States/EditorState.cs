@@ -328,6 +328,11 @@ namespace PathfinderMG.Core.Source.States
 
         private void Grid_NodeClicked(object sender, Node e)
         {
+            if ((toolbar.CurrentTool == Tool.StartNode && e.Position == grid.StartingNode.Position)
+                || (toolbar.CurrentTool == Tool.TargetNode && e.Position == grid.TargetNode.Position))
+                return;
+                
+
             ScenarioWrapper currentState = grid.GetGridWrapper();
             currentState.Data[(int)e.Position.Y] = currentState.Data[(int)e.Position.Y]
                                                         .Remove((int)e.Position.X, 1)
