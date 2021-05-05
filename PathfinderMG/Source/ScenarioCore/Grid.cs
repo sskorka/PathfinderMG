@@ -63,6 +63,11 @@ namespace PathfinderMG.Core.Source.ScenarioCore
         /// </summary>
         public event EventHandler NodeLeft;
 
+        /// <summary>
+        /// Fires when user clicks on any node
+        /// </summary>
+        public event EventHandler<Node> NodeClicked;
+
         #endregion
 
         #region Constructor/Load Content
@@ -147,9 +152,18 @@ namespace PathfinderMG.Core.Source.ScenarioCore
 
             hoveredNode = GetNodeCoordsFromLocation(GameRoot.Mouse.CurrentPosition);
 
-            // Fire the event
+            // Fire the events
             if (hoveredNode != new Vector2(-1, -1))
-                NodeHovered?.Invoke(this, (Node)nodes[(int)hoveredNode.X, (int)hoveredNode.Y].Clone());
+            {
+                var clonedHoveredNode = (Node)nodes[(int)hoveredNode.X, (int)hoveredNode.Y].Clone();
+
+                NodeHovered?.Invoke(this, clonedHoveredNode);
+                
+                if(GameRoot.Mouse.LeftButtonClicked())
+                {
+                    NodeClicked?.Invoke(this, clonedHoveredNode);
+                }
+            }
             else
                 NodeLeft?.Invoke(this, null);
         }
