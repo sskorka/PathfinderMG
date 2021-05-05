@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using PathfinderMG.Core.Source.ScenarioCore.Pathfinders;
+using PathfinderMG.Core.Source.ScenarioEditor;
 using System;
 
 namespace PathfinderMG.Core.Source.ScenarioCore
@@ -98,6 +99,25 @@ namespace PathfinderMG.Core.Source.ScenarioCore
             gridOrigin = new Vector2(originX, originY);
         }
 
+        public void SetHoveredNodeType(Tool type)
+        {
+            switch (type)
+            {
+                case Tool.Rubber:
+                    hoveredNodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/HoveredNode");
+                    break;
+                case Tool.Wall:
+                    hoveredNodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/ImpassableNode");
+                    break;
+                case Tool.StartNode:
+                    hoveredNodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/StartNode");
+                    break;
+                case Tool.TargetNode:
+                    hoveredNodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/TargetNode");
+                    break;
+            }
+        }
+
         private void LoadContent()
         {
             nodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/Node");
@@ -133,26 +153,7 @@ namespace PathfinderMG.Core.Source.ScenarioCore
             
             nodeSize *= scaleFactor;
         }
-
-        private void SetHoveredNodeType(Constants.NodeType type)
-        {
-            switch(type)
-            {
-                case Constants.NodeType.EmptyNode:
-                    hoveredNodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/HoveredNode");
-                    break;
-                case Constants.NodeType.WallNode:
-                    hoveredNodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/ImpassableNode");
-                    break;
-                case Constants.NodeType.StartNode:
-                    hoveredNodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/StartNode");
-                    break;
-                case Constants.NodeType.TargetNode:
-                    hoveredNodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/TargetNode");
-                    break;
-            }
-        }
-
+        
         #endregion
 
         #region Update/Draw
