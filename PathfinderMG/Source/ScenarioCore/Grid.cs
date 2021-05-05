@@ -142,76 +142,6 @@ namespace PathfinderMG.Core.Source.ScenarioCore
         
         #endregion
 
-        #region Update/Draw
-
-        public void Update(GameTime gameTime)
-        {
-            // No hover logic in preview mode
-            if (isPreviewMode)
-                return;
-
-            hoveredNode = GetNodeCoordsFromLocation(GameRoot.Mouse.CurrentPosition);
-
-            // Fire the events
-            if (hoveredNode != new Vector2(-1, -1))
-            {
-                var clonedHoveredNode = (Node)nodes[(int)hoveredNode.X, (int)hoveredNode.Y].Clone();
-
-                NodeHovered?.Invoke(this, clonedHoveredNode);
-                
-                if(GameRoot.Mouse.LeftButtonClicked())
-                {
-                    NodeClicked?.Invoke(this, clonedHoveredNode);
-                }
-            }
-            else
-                NodeLeft?.Invoke(this, null);
-        }
-
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            Texture2D finalTex;
-            Rectangle destinationRect;
-
-            for (int i = 0; i < nodes.GetLength(0); i++)
-            {
-                for (int j = 0; j < nodes.GetLength(1); j++)
-                {
-                    if (StartingNode.Position.X == i && StartingNode.Position.Y == j)
-                        finalTex = startNodeTex;
-                    else if (TargetNode.Position.X == i && TargetNode.Position.Y == j)
-                        finalTex = targetNodeTex;
-                    else if (!nodes[i, j].IsTraversable)
-                        finalTex = impassableNodeTex;
-                    else
-                        finalTex = nodeTex;
-
-                    if(Algorithm != null)
-                        DrawAlgorithmicMagic(i, j, ref finalTex);
-
-                    if (hoveredNode.X == i && hoveredNode.Y == j)
-                        finalTex = hoveredNodeTex;
-
-                    destinationRect = new Rectangle((int)gridOrigin.X + (i * (int)nodeSize), (int)gridOrigin.Y + (j * (int)nodeSize), (int)nodeSize - 2, (int)nodeSize - 2);
-                    spriteBatch.Draw(finalTex, destinationRect, null, Color.White, 0.0f, new Vector2(0, 0), SpriteEffects.None, 0);
-                }
-            }
-        }
-
-        private void DrawAlgorithmicMagic(int x, int y, ref Texture2D tex)
-        {
-            if (nodes[x, y] == StartingNode || nodes[x, y] == TargetNode || !nodes[x, y].IsTraversable)
-                return;
-            if ((Algorithm as AStarPathfinder).OpenNodes.Contains(nodes[x, y]) && DrawOpenClosedNodes)
-                tex = openNode;
-            if ((Algorithm as AStarPathfinder).ClosedNodes.Contains(nodes[x, y]) && DrawOpenClosedNodes)
-                tex = closedNode;
-            if (nodes[x,y].IsPartOfTheSolution)
-                tex = pathNodeTex;
-        }
-
-        #endregion
-
         #region Methods
 
         public void AssignNewAlgorithm(IPathfinder algorithm)
@@ -295,7 +225,77 @@ namespace PathfinderMG.Core.Source.ScenarioCore
                     throw new Exception($"Unknown node type \"{ type }\"");
             }
         }
-        
+
+        #endregion
+
+        #region Update/Draw
+
+        public void Update(GameTime gameTime)
+        {
+            // No hover logic in preview mode
+            if (isPreviewMode)
+                return;
+
+            hoveredNode = GetNodeCoordsFromLocation(GameRoot.Mouse.CurrentPosition);
+
+            // Fire the events
+            if (hoveredNode != new Vector2(-1, -1))
+            {
+                var clonedHoveredNode = (Node)nodes[(int)hoveredNode.X, (int)hoveredNode.Y].Clone();
+
+                NodeHovered?.Invoke(this, clonedHoveredNode);
+
+                if (GameRoot.Mouse.LeftButtonHeld())
+                {
+                    NodeClicked?.Invoke(this, clonedHoveredNode);
+                }
+            }
+            else
+                NodeLeft?.Invoke(this, null);
+        }
+
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            Texture2D finalTex;
+            Rectangle destinationRect;
+
+            for (int i = 0; i < nodes.GetLength(0); i++)
+            {
+                for (int j = 0; j < nodes.GetLength(1); j++)
+                {
+                    if (StartingNode.Position.X == i && StartingNode.Position.Y == j)
+                        finalTex = startNodeTex;
+                    else if (TargetNode.Position.X == i && TargetNode.Position.Y == j)
+                        finalTex = targetNodeTex;
+                    else if (!nodes[i, j].IsTraversable)
+                        finalTex = impassableNodeTex;
+                    else
+                        finalTex = nodeTex;
+
+                    if (Algorithm != null)
+                        DrawAlgorithmicMagic(i, j, ref finalTex);
+
+                    if (hoveredNode.X == i && hoveredNode.Y == j)
+                        finalTex = hoveredNodeTex;
+
+                    destinationRect = new Rectangle((int)gridOrigin.X + (i * (int)nodeSize), (int)gridOrigin.Y + (j * (int)nodeSize), (int)nodeSize - 2, (int)nodeSize - 2);
+                    spriteBatch.Draw(finalTex, destinationRect, null, Color.White, 0.0f, new Vector2(0, 0), SpriteEffects.None, 0);
+                }
+            }
+        }
+
+        private void DrawAlgorithmicMagic(int x, int y, ref Texture2D tex)
+        {
+            if (nodes[x, y] == StartingNode || nodes[x, y] == TargetNode || !nodes[x, y].IsTraversable)
+                return;
+            if ((Algorithm as AStarPathfinder).OpenNodes.Contains(nodes[x, y]) && DrawOpenClosedNodes)
+                tex = openNode;
+            if ((Algorithm as AStarPathfinder).ClosedNodes.Contains(nodes[x, y]) && DrawOpenClosedNodes)
+                tex = closedNode;
+            if (nodes[x, y].IsPartOfTheSolution)
+                tex = pathNodeTex;
+        }
+
         #endregion
     }
 }
