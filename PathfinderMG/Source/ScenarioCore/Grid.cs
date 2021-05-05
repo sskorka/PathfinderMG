@@ -99,25 +99,6 @@ namespace PathfinderMG.Core.Source.ScenarioCore
             gridOrigin = new Vector2(originX, originY);
         }
 
-        public void SetHoveredNodeType(Tool type)
-        {
-            switch (type)
-            {
-                case Tool.Rubber:
-                    hoveredNodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/HoveredNode");
-                    break;
-                case Tool.Wall:
-                    hoveredNodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/ImpassableNode");
-                    break;
-                case Tool.StartNode:
-                    hoveredNodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/StartNode");
-                    break;
-                case Tool.TargetNode:
-                    hoveredNodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/TargetNode");
-                    break;
-            }
-        }
-
         private void LoadContent()
         {
             nodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/Node");
@@ -222,6 +203,25 @@ namespace PathfinderMG.Core.Source.ScenarioCore
         public void AssignNewAlgorithm(IPathfinder algorithm)
         {
             Algorithm = algorithm;
+        }
+
+        public void SetHoveredNodeType(Tool type)
+        {
+            switch (type)
+            {
+                case Tool.Rubber:
+                    hoveredNodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/HoveredNode");
+                    break;
+                case Tool.Wall:
+                    hoveredNodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/ImpassableNode");
+                    break;
+                case Tool.StartNode:
+                    hoveredNodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/StartNode");
+                    break;
+                case Tool.TargetNode:
+                    hoveredNodeTex = GameRoot.ContentMgr.Load<Texture2D>("Grid/TargetNode");
+                    break;
+            }
         }
 
         private Vector2 GetNodeCoordsFromLocation(Vector2 location)
