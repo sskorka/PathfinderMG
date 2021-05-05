@@ -29,7 +29,7 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
         public float ItemDimensions { get { return ToolbarHeight * 0.6f; } }
         public Vector2 ItemMargin { get; set; } = new Vector2(5, 0);
 
-        public event EventHandler ToolbarSelectionChanged;
+        public event EventHandler<Tool> ToolbarSelectionChanged;
 
         public Rectangle Area
         {
