@@ -28,6 +28,7 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
         public int BottomMargin { get; set; } = 20;
         public float ItemDimensions { get { return ToolbarHeight * 0.6f; } }
         public Vector2 ItemMargin { get; set; } = new Vector2(5, 0);
+        public Tool CurrentTool { get; set; }
 
         public event EventHandler<Tool> ToolbarSelectionChanged;
 
@@ -62,6 +63,7 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
             }
 
             toolbarItems[0].Select();
+            CurrentTool = toolbarItems[0].ToolType;
         }
 
         public void Select(int index)
@@ -77,6 +79,7 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
                 item.Deselect();
             }
 
+            CurrentTool = itemToSelect.ToolType;
             ToolbarSelectionChanged?.Invoke(this, itemToSelect.ToolType);
         }
 
