@@ -328,7 +328,13 @@ namespace PathfinderMG.Core.Source.States
 
         private void Grid_NodeClicked(object sender, Node e)
         {
-            throw new NotImplementedException();
+            ScenarioWrapper currentState = grid.GetGridWrapper();
+            currentState.Data[(int)e.Position.Y] = currentState.Data[(int)e.Position.Y]
+                                                        .Remove((int)e.Position.X, 1)
+                                                        .Insert((int)e.Position.X, ((char)GetNodeTypeFromToolType(toolbar.CurrentTool)).ToString());
+            
+            grid = new Grid(previewData, Constants.DEFAULT_NODE_SIZE, currentState);
+            grid.NodeClicked += Grid_NodeClicked;
         }
 
         #endregion
