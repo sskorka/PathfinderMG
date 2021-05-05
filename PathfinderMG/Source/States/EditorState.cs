@@ -66,11 +66,6 @@ namespace PathfinderMG.Core.Source.States
             toolbar.ToolbarSelectionChanged += Toolbar_ToolbarSelectionChanged;
         }
 
-        private void Toolbar_ToolbarSelectionChanged(object sender, Tool e)
-        {
-            grid.SetHoveredNodeType(e);
-        }
-
         #endregion
 
         #region Methods
@@ -302,6 +297,11 @@ namespace PathfinderMG.Core.Source.States
 
         private void EditorEntryDialog_BackgroundClick(object sender, EventArgs e)
         {
+        }
+
+        private void Toolbar_ToolbarSelectionChanged(object sender, Tool e)
+        {
+            grid.SetHoveredNodeType(e);
         }
 
         #endregion
