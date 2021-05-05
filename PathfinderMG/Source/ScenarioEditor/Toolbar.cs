@@ -62,7 +62,6 @@ namespace PathfinderMG.Core.Source.ScenarioEditor
             }
 
             toolbarItems[0].Select();
-            ToolbarSelectionChanged?.Invoke(this, toolbarItems[0].ToolType);
         }
 
         public void Select(int index)
