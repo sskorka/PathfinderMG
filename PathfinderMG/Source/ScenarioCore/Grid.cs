@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using PathfinderMG.Core.Source.ScenarioCore.Pathfinders;
 using PathfinderMG.Core.Source.ScenarioEditor;
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace PathfinderMG.Core.Source.ScenarioCore
 {
@@ -168,6 +170,30 @@ namespace PathfinderMG.Core.Source.ScenarioCore
             }
         }
 
+        public List<string> GetGridData()
+        {
+            List<string> output = new List<string>();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < Nodes.GetLength(0); i++)
+            {
+                for (int j = 0; j < Nodes.GetLength(1); j++)
+                {
+                    if (!Nodes[i, j].IsTraversable)
+                        sb.Append((char)Constants.NodeType.WallNode);
+                    else if (StartingNode.Position.X == i && StartingNode.Position.Y == j)
+                        sb.Append((char)Constants.NodeType.StartNode);
+                    else if (TargetNode.Position.X == i && TargetNode.Position.Y == j)
+                        sb.Append((char)Constants.NodeType.TargetNode);
+                    else
+                        sb.Append((char)Constants.NodeType.EmptyNode);
+                }
+                output.Add(sb.ToString());
+                sb.Clear();
+            }
+
+            return output;
+        }
+
         private Vector2 GetNodeCoordsFromLocation(Vector2 location)
         {
             // Check if location is inside the grid
@@ -181,7 +207,7 @@ namespace PathfinderMG.Core.Source.ScenarioCore
             return output;
         }
 
-        private Node[,] GetGridFromWrapper(System.Collections.Generic.List<string> scenarioData)
+        private Node[,] GetGridFromWrapper(List<string> scenarioData)
         {
             nodeCount = new Vector2(scenarioData[0].Length, scenarioData.Count);
             Node[,] output = new Node[(int)nodeCount.X, (int)nodeCount.Y];
