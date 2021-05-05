@@ -174,16 +174,16 @@ namespace PathfinderMG.Core.Source.ScenarioCore
         {
             List<string> data = new List<string>();
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < Nodes.GetLength(0); i++)
+            for (int i = 0; i < Nodes.GetLength(1); i++)
             {
-                for (int j = 0; j < Nodes.GetLength(1); j++)
+                for (int j = 0; j < Nodes.GetLength(0); j++)
                 {
-                    if (!Nodes[i, j].IsTraversable)
-                        sb.Append((char)Constants.NodeType.WallNode);
-                    else if (StartingNode.Position.X == i && StartingNode.Position.Y == j)
+                    if (StartingNode.Position.Y == i && StartingNode.Position.X == j)
                         sb.Append((char)Constants.NodeType.StartNode);
-                    else if (TargetNode.Position.X == i && TargetNode.Position.Y == j)
+                    else if (TargetNode.Position.Y == i && TargetNode.Position.X == j)
                         sb.Append((char)Constants.NodeType.TargetNode);
+                    else if (!Nodes[j, i].IsTraversable)
+                        sb.Append((char)Constants.NodeType.WallNode);
                     else
                         sb.Append((char)Constants.NodeType.EmptyNode);
                 }
