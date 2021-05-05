@@ -63,6 +63,12 @@ namespace PathfinderMG.Core.Source.States
 
             LoadUI();
             toolbar = new Toolbar();
+            toolbar.ToolbarSelectionChanged += Toolbar_ToolbarSelectionChanged;
+        }
+
+        private void Toolbar_ToolbarSelectionChanged(object sender, Tool e)
+        {
+            grid.SetHoveredNodeType(e);
         }
 
         #endregion
