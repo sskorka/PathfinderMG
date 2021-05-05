@@ -174,6 +174,24 @@ namespace PathfinderMG.Core.Source.States
             grid.NodeClicked += Grid_NodeClicked;
         }
 
+        private Constants.NodeType GetNodeTypeFromToolType(Tool tool)
+        {
+            switch(tool)
+            {
+                case Tool.Wall:
+                    return Constants.NodeType.WallNode;
+                case Tool.StartNode:
+                    return Constants.NodeType.StartNode;
+                case Tool.TargetNode:
+                    return Constants.NodeType.TargetNode;
+                case Tool.Rubber:
+                    return Constants.NodeType.EmptyNode;
+                default:
+                    throw new Exception($"Unknown tool type provided! ${ tool }");
+            }
+                
+        }
+
         private void LoadUI()
         {
             SpriteFont font = GameRoot.ContentMgr.Load<SpriteFont>("Fonts/DefaultFont");
