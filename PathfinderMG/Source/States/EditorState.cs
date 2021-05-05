@@ -66,6 +66,7 @@ namespace PathfinderMG.Core.Source.States
             toolbar.ToolbarSelectionChanged += Toolbar_ToolbarSelectionChanged;
                         
             this.grid.SetHoveredNodeType(Tool.Wall);
+            this.grid.NodeClicked += Grid_NodeClicked;
         }
 
         #endregion
@@ -170,6 +171,7 @@ namespace PathfinderMG.Core.Source.States
             };
 
             grid = new Grid(previewData, Constants.DEFAULT_NODE_SIZE, newScenario);
+            grid.NodeClicked += Grid_NodeClicked;
         }
 
         private void LoadUI()
@@ -304,6 +306,11 @@ namespace PathfinderMG.Core.Source.States
         private void Toolbar_ToolbarSelectionChanged(object sender, Tool e)
         {
             grid.SetHoveredNodeType(e);
+        }
+
+        private void Grid_NodeClicked(object sender, Node e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
