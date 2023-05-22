@@ -5,8 +5,6 @@ namespace PathfinderMG.Core.Source.ScenarioCore
 {
     class Node : ICloneable
     {
-        #region Properties
-
         public bool IsTraversable { get; private set; }
         public bool IsPartOfTheSolution { get; set; } = false;
         public bool IsInOpenList { get; set; }
@@ -30,14 +28,12 @@ namespace PathfinderMG.Core.Source.ScenarioCore
         /// <summary>
         /// Sum of gCost and hCost
         /// </summary>
-        public int FCost { get { return GCost + HCost; } }
+        public int FCost => GCost + HCost;
 
         /// <summary>
         /// The preceeding node for tracing back the fastest path
         /// </summary>
         public Node Parent { get; set; }
-
-        #endregion
 
         public Node(bool isTraversable, Vector2 position)
         {
