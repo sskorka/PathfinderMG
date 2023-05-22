@@ -36,7 +36,7 @@ namespace PathfinderMG.Core.Source.States
         private void LoadUI()
         {
             components = new List<Control>();
-            
+
             // Load "Back to menu" button
             SpriteFont buttonFont = GameRoot.ContentMgr.Load<SpriteFont>("Fonts/DefaultFont");
             ButtonPack buttonPack = new ButtonPack()
@@ -143,14 +143,14 @@ namespace PathfinderMG.Core.Source.States
         {
             Checkbox diagonalsCheckbox = new Checkbox(CHECKBOX_STRINGS["allowDiagonalPathing"], Color.White)
             {
-                IsChecked = AStarPathfinder.AllowDiagonalMovement
+                IsChecked = pathfinder.AllowDiagonalMovement
             };
 
             diagonalsCheckbox.Click += DiagonalsCheckbox_Click;
 
             Checkbox instantCheckbox = new Checkbox(CHECKBOX_STRINGS["instantPathing"], Color.White)
             {
-                IsChecked = AStarPathfinder.InstantPathing
+                IsChecked = pathfinder.InstantPathing
             };
 
             instantCheckbox.Click += InstantCheckbox_Click;
@@ -180,8 +180,8 @@ namespace PathfinderMG.Core.Source.States
             // Experimental textbox
             Rectangle tbArea = new Rectangle(0, 0, (int)font.MeasureString("999").X * 3, 20);
 
-            TextBox visualizationSpeedInput = new TextBox(tbArea, pathfinder.MAX_VISUALIZATION_TIME.ToString().Length,
-                                                          pathfinder.DEFAULT_VISUALIZATION_TIME.ToString(), GameRoot.RootGraphicsDevice, font,
+            TextBox visualizationSpeedInput = new TextBox(tbArea, MaxVisualizationTime.ToString().Length,
+                                                          DefaultVisualizationTime.ToString(), GameRoot.RootGraphicsDevice, font,
                                                           TextBox.InputType.NumbersOnly, Color.White, Color.Gray, Color.DimGray, 30)
             {
                 Rectangle = new Rectangle(tbArea.X, tbArea.Y, tbArea.Width, tbArea.Height),

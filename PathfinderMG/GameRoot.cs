@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame_Textbox;
 using PathfinderMG.Core.Source;
+using PathfinderMG.Core.Source.ScenarioCore.Pathfinders;
 using PathfinderMG.Core.Source.States;
 
 namespace PathfinderMG.Core
@@ -12,6 +13,7 @@ namespace PathfinderMG.Core
         public static ContentManager ContentMgr;
         public static MouseManager Mouse;
         public static GraphicsDevice RootGraphicsDevice;
+        public static new GameServiceContainer Services;
 
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
@@ -34,6 +36,8 @@ namespace PathfinderMG.Core
             graphics.ApplyChanges();
 
             Mouse = new MouseManager();
+            Services = base.Services;
+            Services.AddService<IPathfinder>(new AStarPathfinder());
 
             base.Initialize();
         }
