@@ -11,7 +11,6 @@ namespace PathfinderMG.Core.Source.GUI
         protected SpriteFont font;
         protected Texture2D texture;
         protected bool isHovering;
-        protected int offset;
 
         private string text;
 

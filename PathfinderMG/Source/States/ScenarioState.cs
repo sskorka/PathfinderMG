@@ -9,19 +9,21 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace PathfinderMG.Core.Source.States
-{
+namespace PathfinderMG.Core.Source.States;
+
     partial class ScenarioState : State
     {
         #region Fields
 
         private Grid scenarioGrid;
         private AStarPathfinder pathfinder;
+    private readonly Grid scenarioGrid;
+    private readonly IPathfinder pathfinder;
+    private readonly Dictionary<string, bool> focusModeSettings = new();
         private PanelContainer uiOptionsPanel, uiNodeInfoPanel;
         private Button returnButton;
-        private Dictionary<string, bool> focusModeSettings = new Dictionary<string, bool>();
 
-        private CancellationTokenSource cts = new CancellationTokenSource();
+    private CancellationTokenSource cts = new();
 
         #endregion
 
@@ -79,12 +81,12 @@ namespace PathfinderMG.Core.Source.States
             
             // Save current settings
             foreach (var c in uiOptionsPanel.Controls)
-                if (!(c is Button) && !(c is TextBox))
+            if (c is not Button && c is not TextBox)
                     focusModeSettings.Add(c.Text, c.IsVisible);
 
             // Turn visibility off
             foreach (var c in uiOptionsPanel.Controls)            
-                if (!(c is Button))
+            if (c is not Button)
                     c.IsVisible = false;            
         }
 
@@ -92,7 +94,7 @@ namespace PathfinderMG.Core.Source.States
         {
             // Restore settings
             foreach (var c in uiOptionsPanel.Controls)
-                if (!(c is Button) && !(c is TextBox))
+            if (c is not Button && c is not TextBox)
                     c.IsVisible = focusModeSettings[c.Text];
 
             uiOptionsPanel.Controls.Find(c => c is TextBox).IsVisible = true;
@@ -152,7 +154,7 @@ namespace PathfinderMG.Core.Source.States
                 drawNodesCheckbox.IsVisible = enabled;
 
                 // If instant pathing gets turned off, make sure that drawing open/closed nodes is always true
-                scenarioGrid.DrawOpenClosedNodes = enabled ? scenarioGrid.DrawOpenClosedNodes : true;
+            scenarioGrid.DrawOpenClosedNodes = !enabled || scenarioGrid.DrawOpenClosedNodes;
             }
         }
 
@@ -175,8 +177,7 @@ namespace PathfinderMG.Core.Source.States
 
         private void VisualizationSpeedInput_InputChanged(object sender, string e)
         {
-            int inputValue;
-            if (Int32.TryParse(e, out inputValue))
+        if (Int32.TryParse(e, out int inputValue))
             {
                 if (inputValue > pathfinder.MAX_VISUALIZATION_TIME)
                     inputValue = pathfinder.MAX_VISUALIZATION_TIME;
@@ -222,4 +223,3 @@ namespace PathfinderMG.Core.Source.States
 
         #endregion
     }
-}

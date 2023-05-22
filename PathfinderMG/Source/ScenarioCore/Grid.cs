@@ -32,17 +32,9 @@ namespace PathfinderMG.Core.Source.ScenarioCore
                     return new Vector2(1, 1);
             }
         }
-        public Node[,] Nodes
-        {
-            get
-            {
-                return nodes;
-            }
-        }
-        public Vector2 NodeCount
-        {
-            get { return new Vector2(nodes.GetLength(0), nodes.GetLength(1)); }
-        }
+        public Node[,] Nodes => nodes;
+        public Vector2 NodeCount => new(nodes.GetLength(0), nodes.GetLength(1));
+        
         public bool DrawOpenClosedNodes { get; set; } = true;
         public Node StartingNode { get; private set; }
         public Node TargetNode { get; private set; }
@@ -165,7 +157,7 @@ namespace PathfinderMG.Core.Source.ScenarioCore
                         finalTex = nodeTex;
 
                     if(Algorithm != null)
-                        DrawAlgorithmicMagic(i, j, ref finalTex);
+                        DrawAStarMagic(i, j, ref finalTex);
 
                     if (hoveredNode.X == i && hoveredNode.Y == j)
                         finalTex = hoveredNodeTex;
@@ -176,7 +168,13 @@ namespace PathfinderMG.Core.Source.ScenarioCore
             }
         }
 
-        private void DrawAlgorithmicMagic(int x, int y, ref Texture2D tex)
+        /// <summary>
+        /// Since open/closed nodes are specific to the A* algorithm, this function is implementation-specific.
+        /// </summary>
+        /// <remarks>
+        /// TODO: Abstract this out together with the <see cref="IPathfinder"/> to a <see cref="GameServiceContainer"/>.
+        /// </remarks>
+        private void DrawAStarMagic(int x, int y, ref Texture2D tex)
         {
             if (nodes[x, y] == StartingNode || nodes[x, y] == TargetNode || !nodes[x, y].IsTraversable)
                 return;
