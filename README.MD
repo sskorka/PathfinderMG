@@ -78,7 +78,10 @@ The project has not been tested on OSX systems and might behave unpredictably or
 
 ## Building the project
 
-You need **Visual Studio** or **Visual Studio Code** in order to build the project. There are several more steps involved in order to build a MonoGame project - please follow the instructions from the official [MonoGame docs](https://docs.monogame.net/articles/getting_started/0_getting_started.html) to set up your environment properly.
+You need **Visual Studio** or **Visual Studio Code** in order to build the project. There are several more steps involved in order to build a MonoGame project - please follow the instructions from the official [MonoGame docs](https://docs.monogame.net/articles/getting_started/0_getting_started.html) to set up your environment properly. Additionally:
+
+- Install [MonoGame Content Builder tool](https://docs.monogame.net/articles/tools/mgcb.html)
+- Make sure you have a [Berlins Sans FB](https://www.dafontfree.net/berlin-sans-fb-regular/f64533.htm) font installed in your system. This is a temporary measure until the asset pipeline is updated.
 
 ## License
 
